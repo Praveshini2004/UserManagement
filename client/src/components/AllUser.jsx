@@ -24,6 +24,7 @@ const Trow = styled(TableRow)`
 
 const AllUser = () => {
     const [users, setUsers] = useState([]);
+    const [error, setError] = useState(null);
 
     useEffect(() => {
         getAllUsers();
@@ -32,9 +33,16 @@ const AllUser = () => {
     const getAllUsers = async () => {
         try {
             const response = await getUsers();
-            setUsers(response.data);
+            console.log("API Response:", response.data); // Log the response
+            if (Array.isArray(response.data)) {
+                setUsers(response.data);
+            } else {
+                console.error("Unexpected response format:", response.data);
+                setError("Unexpected response format");
+            }
         } catch (error) {
             console.error("Error fetching users:", error);
+            setError("Error fetching users");
         }
     };
 
@@ -44,8 +52,13 @@ const AllUser = () => {
             getAllUsers();
         } catch (error) {
             console.error("Error deleting user:", error);
+            setError("Error deleting user");
         }
     };
+
+    if (error) {
+        return <div>Error: {error}</div>;
+    }
 
     return (
         <StyledTable>
