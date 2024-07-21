@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const URL = 'http://localhost:8000';
+const URL = 'https://user-management-frontend-gamma.vercel.app/';
 
 // Add a new user
 export const addUser = async (data) => {
