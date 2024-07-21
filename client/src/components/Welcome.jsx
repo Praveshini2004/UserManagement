@@ -1,7 +1,7 @@
 
 const Welcome=()=>{
     return (
-        <p>Hello</p>
+        <p>Welcome.....</p>
     )
 }
 export default Welcome; 
